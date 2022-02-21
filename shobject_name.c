@@ -20,5 +20,21 @@ const char* SHOBJ_NAME_FORMAT = "/csc2035.%.9s.%.12s";
  *      environment (use "anon" if the function returns NULL)
  */
 char* shobject_name(char* name_buf, const char* label) {
-    return NULL;
+
+    char* user = getenv("USER");
+    if (!user){
+        user = "anon";
+    }
+
+    if (!label || !label[0]) {
+        label = "none";
+    }
+    if (name_buf) {
+        int r = snprintf(name_buf, MAX_NAME_SIZE, SHOBJ_NAME_FORMAT, user, label);
+        return r < 0 ? NULL : name_buf;
+    } else {
+        char* buf;
+        int r = asprintf(&buf, SHOBJ_NAME_FORMAT, user, label);
+        return r < 0 ? NULL : buf;
+    }
 }
