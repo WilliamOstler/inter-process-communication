@@ -4,8 +4,8 @@
  */
 #include <stdlib.h>
 #include "job.h"
-
-/* 
+#include <string.h>
+/*
  * DO NOT EDIT the job_new function.
  */
 job_t* job_new(pid_t pid, unsigned int id, const char* label) {
@@ -43,7 +43,13 @@ void job_init(job_t* job) {
  * currently only compares the pid and id fields of a job.
  */
 bool job_is_equal(job_t* j1, job_t* j2) {
-    return j1->pid == j2->pid && j1->id == j2->id;
+    if (!j1 && !j2) {
+        return true;
+    }else if(!j1 || !j2){
+        return false;
+    }else{
+        return ((j1->pid == j2->pid && j1->id == j2->id && strcmp(j1->label, j2->label) == 0));
+    }
 }
 
 /*
