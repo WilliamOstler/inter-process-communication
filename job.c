@@ -20,7 +20,17 @@ job_t* job_new(pid_t pid, unsigned int id, const char* label) {
  *      this function
  */
 job_t* job_copy(job_t* dst, job_t* src) {
-    return src;
+    if (!src){
+        return src;
+    }else if (src == dst){
+        return dst;
+    }else if(!dst){
+        dst = (job_t*) malloc(sizeof(job_t));
+    }
+
+    dst = job_set(dst, src->pid, src->id, src->label);
+
+    return dst;
 }
 
 /* 
