@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "job.h"
 #include <string.h>
+#include <stdio.h>
 /*
  * DO NOT EDIT the job_new function.
  */
@@ -58,6 +59,19 @@ bool job_is_equal(job_t* j1, job_t* j2) {
  * - read the information in job.h about padding and truncation of job labels
  */
 job_t* job_set(job_t* job, pid_t pid, unsigned int id, const char* label) {
+    if (job){
+
+        if (!label){
+            label = "";
+        }
+
+        char* padding ="********************************";
+        job->pid = pid;
+        job->id = id;
+
+        int i = snprintf(job->label, MAX_NAME_SIZE, "%s%s", label, padding);
+        return i < 0 ? NULL : job;
+    }
     return job;
 }
 
