@@ -91,5 +91,5 @@ job_t* job_set(job_t* job, pid_t pid, unsigned int id, const char* label) {
  * - look at the allocation of a job in job_new
  */
 void job_delete(job_t* job) {
-    return;
+    free(job);
 }
