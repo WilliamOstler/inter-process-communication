@@ -34,7 +34,11 @@ jobqueue_t* jobqueue_new() {
  * TODO: you must implement this function.
  */
 size_t jobqueue_capacity(jobqueue_t* jq) {
-    return 0;
+    if (!jq){
+        return 0;
+    } else {
+        return QUEUE_SIZE - 1;
+    }
 }
 
 /* 
