@@ -53,7 +53,23 @@ size_t jobqueue_capacity(jobqueue_t* jq) {
  *      this function 
  */
 job_t* jobqueue_dequeue(jobqueue_t* jq, job_t* dst) {
-    return NULL;
+
+    if (!jq || jobqueue_is_empty(jq)){
+        return NULL;
+    }
+
+    if (!dst){
+        dst = (job_t*) malloc(sizeof(job_t));
+    }
+
+    job_t job = jq->jobs[jq->head];
+
+    dst = job_copy(dst, &job);
+    job_init(&job);
+
+    jq->head = (jq->head + 1) % jq->buf_size;
+
+    return dst;
 }
 
 /* 
@@ -79,7 +95,10 @@ bool jobqueue_is_empty(jobqueue_t* jq) {
  * TODO: you must implement this function.
  */
 bool jobqueue_is_full(jobqueue_t* jq) {
-    return false;
+    if (!jq){
+        return true;
+    }
+    return (jq->head == (jq->tail +1)%jq->buf_size);
 }
 
 /* 
