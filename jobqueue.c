@@ -130,10 +130,9 @@ job_t* jobqueue_peektail(jobqueue_t* jq, job_t* dst) {
         dst = (job_t*) malloc(sizeof (job_t));
     }
 
-    /**
-     * TODO: DONT THINK THIS IS CORRECT, BUT IT PASSES TESTS. COME BACK TO THIS LATER!
-     */
-    return job_copy(dst, &jq->jobs[jq->tail-1]);
+    int tail = (jq->tail == 0) ? jobqueue_capacity(jq) : jq->tail - 1;
+
+    return job_copy(dst, &jq->jobs[tail]);
 }
 
 /* 
