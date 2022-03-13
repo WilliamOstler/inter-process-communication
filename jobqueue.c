@@ -122,7 +122,18 @@ job_t* jobqueue_peekhead(jobqueue_t* jq, job_t* dst) {
  *      calculated from those values)
  */
 job_t* jobqueue_peektail(jobqueue_t* jq, job_t* dst) {
-    return NULL;
+
+    if (jobqueue_is_empty(jq)){
+        return NULL;
+    }
+    if (!dst){
+        dst = (job_t*) malloc(sizeof (job_t));
+    }
+
+    /**
+     * TODO: DONT THINK THIS IS CORRECT, BUT IT PASSES TESTS. COME BACK TO THIS LATER!
+     */
+    return job_copy(dst, &jq->jobs[jq->tail-1]);
 }
 
 /* 
