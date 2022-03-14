@@ -62,12 +62,11 @@ job_t* jobqueue_dequeue(jobqueue_t* jq, job_t* dst) {
         dst = (job_t*) malloc(sizeof(job_t));
     }
 
-    job_t job = jq->jobs[jq->head];
+    job_t* job = &(jq->jobs[jq->head]);
+    job_copy(dst, job);
 
-    dst = job_copy(dst, &job);
-    job_init(&job);
-
-    jq->head = (jq->head + 1) % jq->buf_size;
+    job_init(job);
+    jq->head = (jq->head + 1) % jq->buf_size;;
 
     return dst;
 }
