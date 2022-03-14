@@ -138,5 +138,6 @@ job_t* jobqueue_peektail(jobqueue_t* jq, job_t* dst) {
  * TODO: you must implement this function.
  */
 void jobqueue_delete(jobqueue_t* jq) {
+    free(jq);
     return;
 }
