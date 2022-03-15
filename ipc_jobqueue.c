@@ -79,7 +79,11 @@ bool ipc_jobqueue_is_empty(ipc_jobqueue_t* ijq) {
  * - see ipc_jobqueue_dequeue hint
  */
 bool ipc_jobqueue_is_full(ipc_jobqueue_t* ijq) {
-    return true;
+    if(!ijq){
+        return true;
+    }
+    do_critical_work(ijq->proc);
+    return jobqueue_is_full((jobqueue_t*) ijq->addr);
 }
 
 /* 
