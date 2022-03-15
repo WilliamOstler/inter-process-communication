@@ -92,14 +92,16 @@ bool ipc_jobqueue_is_full(ipc_jobqueue_t* ijq) {
  * - see ipc_jobqueue_dequeue hint
  */
 job_t* ipc_jobqueue_peekhead(ipc_jobqueue_t* ijq, job_t* dst) {
-    return NULL;
+    if(!ijq){
+        return NULL;
+    }
+    dst = jobqueue_peekhead((jobqueue_t*) ijq->addr, dst);
+    if (dst){
+        do_critical_work(ijq->proc);
+    }
+    return dst;
 }
-    
-/* 
- * TODO: you must implement this function.
- * Hint:
- * - see ipc_jobqueue_dequeue hint
- */
+
 job_t* ipc_jobqueue_peektail(ipc_jobqueue_t* ijq, job_t* dst) {
     return NULL;
 }
