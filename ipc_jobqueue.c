@@ -1,6 +1,6 @@
 /*
  * Replace the following string of 0s with your student number
- * 000000000
+ * 20040867
  */
 #include "ipc_jobqueue.h"
 
@@ -27,7 +27,7 @@ ipc_jobqueue_t* ipc_jobqueue_new(proc_t* proc) {
  *      jobqueue by passing it to a function defined in jobqueue.h)
  */
 size_t ipc_jobqueue_capacity(ipc_jobqueue_t* ijq) {
-    return 0;
+    return (!ijq) ? 0 : jobqueue_capacity((jobqueue_t*) ijq);
 }
 
 /* 
