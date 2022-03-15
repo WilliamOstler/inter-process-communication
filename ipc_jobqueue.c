@@ -17,7 +17,7 @@ ipc_jobqueue_t* ipc_jobqueue_new(proc_t* proc) {
 }
 
 size_t ipc_jobqueue_capacity(ipc_jobqueue_t* ijq) {
-    return (!ijq) ? 0 : jobqueue_capacity((jobqueue_t*) ijq);
+    return (!ijq) ? 0 : jobqueue_capacity((jobqueue_t*) ijq->addr);
 }
 
 job_t* ipc_jobqueue_dequeue(ipc_jobqueue_t* ijq, job_t* dst) {
