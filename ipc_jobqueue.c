@@ -119,5 +119,5 @@ job_t* ipc_jobqueue_peektail(ipc_jobqueue_t* ijq, job_t* dst) {
  * - look at how the ipc_jobqueue is allocated in ipc_jobqueue_new
  */
 void ipc_jobqueue_delete(ipc_jobqueue_t* ijq) {
-    return;
+    return ipc_delete(ijq);
 }
