@@ -65,7 +65,12 @@ void ipc_jobqueue_enqueue(ipc_jobqueue_t* ijq, job_t* job) {
  * - see ipc_jobqueue_dequeue hint
  */
 bool ipc_jobqueue_is_empty(ipc_jobqueue_t* ijq) {
-    return true;
+    if(!ijq || jobqueue_is_empty((jobqueue_t*) ijq->addr)){
+        return true;
+    }else{
+        do_critical_work(ijq->proc);
+        return false;
+    }
 }
 
 /* 
