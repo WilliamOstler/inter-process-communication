@@ -51,6 +51,11 @@ job_t* ipc_jobqueue_dequeue(ipc_jobqueue_t* ijq, job_t* dst) {
  * - see ipc_jobqueue_dequeue hint
  */
 void ipc_jobqueue_enqueue(ipc_jobqueue_t* ijq, job_t* job) {
+    if(!ijq || !job){
+        return;
+    }
+    jobqueue_enqueue((jobqueue_t*) ijq->addr, job);
+    do_critical_work(ijq->proc);
     return;
 }
     
