@@ -103,7 +103,14 @@ job_t* ipc_jobqueue_peekhead(ipc_jobqueue_t* ijq, job_t* dst) {
 }
 
 job_t* ipc_jobqueue_peektail(ipc_jobqueue_t* ijq, job_t* dst) {
-    return NULL;
+    if(!ijq){
+        return NULL;
+    }
+    dst = jobqueue_peektail((jobqueue_t*) ijq->addr, dst);
+    if (dst){
+        do_critical_work(ijq->proc);
+    }
+    return dst;
 }
 
 /* 
