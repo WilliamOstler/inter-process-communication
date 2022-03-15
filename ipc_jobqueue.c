@@ -37,7 +37,12 @@ size_t ipc_jobqueue_capacity(ipc_jobqueue_t* ijq) {
  * - and remember you must call do_critical_work after dequeuing the job
  */
 job_t* ipc_jobqueue_dequeue(ipc_jobqueue_t* ijq, job_t* dst) {
-    return NULL;
+    if (!ijq){
+        return NULL;
+    }
+    job_t* dequeued_job = jobqueue_dequeue((jobqueue_t*) ijq->addr, dst);
+    do_critical_work(ijq->proc);
+    return (dequeued_job);
 }
 
 /* 
