@@ -1,8 +1,9 @@
 /*
  * Replace the following string of 0s with your student number
- * 000000000
+ * 200408673
  */
 #include "mutex_peterson.h"
+#include <errno.h>
 
 /* mutex.h contains the specification of functions in this file */
 
@@ -16,7 +17,12 @@
  * - also see: mutex_peterson.h, mutex_lockvar.c and ipc.h
  */
 mutex_t* mutex_new(proc_t* proc) {
-    return NULL;
+
+    if(!proc){
+        errno = EINVAL;
+        return NULL;
+    }
+    return ipc_new(proc, "mux_peters", sizeof(mutex_t));
 }
 
 /* 
