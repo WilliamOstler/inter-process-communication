@@ -36,11 +36,9 @@ void mutex_leave(mutex_t* mux) {
     return;
 }
 
-/* 
- * TODO: you must implement this function.
- * Hint:
- * - deallocate what you allocate in mutex_new
- */
 void mutex_delete(mutex_t* mux) {
+    if(mux){
+        ipc_delete(mux);
+    }
     return;
 }
