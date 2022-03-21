@@ -28,11 +28,11 @@ void mutex_enter(mutex_t* mux) {
     return;
 }
 
-/* 
- * TODO: you must implement this function.
- * Hints: see hints for mutex_enter
- */
 void mutex_leave(mutex_t* mux) {
+    if(mux){
+        mutex_peterson_t* mp = (mutex_peterson_t*) mux->addr;
+        mp->interested[mux->proc->id % 2] = 0;
+    }
     return;
 }
 
